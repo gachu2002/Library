@@ -71,7 +71,21 @@ main {
     padding: 1rem;
     box-shadow: var(--box-shadow);
     height: 200px;
+    position: relative;
+}
 
+.delete-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+
+    background-color: #952626;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 /* Apply styles to book adding button */
@@ -174,6 +188,21 @@ main {
 
 #add-book-form button:hover {
     background-color: #8fa897;
+}
+
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: rgba(255, 42, 34, 0.7);
+    color: black;
+    border: none;
+    border-radius: 5px 0px 10px 20px;
+    width: 50px;
+    height: 35px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding-left: 2px;
 }
 
 

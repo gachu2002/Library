@@ -12,6 +12,12 @@ function addBookToLibrary(title, author, page, isRead) {
     Books.push(new Book(title, author, page, isRead));
 }
 
+// Delete book function
+function deleteBook(index) {
+    Books.splice(index, 1);
+    displayBooks();
+}
+
 function displayBooks() {
     const bookList = document.querySelector(".book-list");
     bookList.innerHTML = "";
@@ -19,11 +25,37 @@ function displayBooks() {
         const bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
         bookCard.innerHTML = `<h2>${book.title}</h2>` + `<p>${book.author}</p>` 
-                            + `<p>${book.page}</p>` + `<p>${book.isRead}</p>`;
+                            + `<p>${book.page}</p>` + `<p>${book.isRead}</p>` + `<button class="delete-button" onclick="deleteBook(${Books.indexOf(book)})">Delete</button>`;
         bookList.appendChild(bookCard);
     });
 }
 
+// Open form function
+function openForm() {
+    document.querySelector(".modal-overlay").style.display = "block";
+}
+
+// Refresh form function
+function refreshForm() {
+    document.querySelector("#title").value = "";
+    document.querySelector("#author").value = "";
+    document.querySelector("#page").value = "";
+    document.querySelector("#isRead").value = "";
+}
+
+// Close form function
+function closeForm() {
+    document.querySelector(".modal-overlay").style.display = "none";
+}
+
+// Add event listener to the "Add Book" button
+const addBookButton = document.querySelector(".add-book-button");
+addBookButton.addEventListener("click", () => {
+    const addBookForm = document.querySelector(".modal-overlay");
+    addBookForm.style.display = "block";
+});
+
+// Add event listener to the Submit button
 const addBookForm = document.querySelector("#add-book-form");
 addBookForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -32,8 +64,19 @@ addBookForm.addEventListener("submit", (event) => {
     const page = document.querySelector("#page").value;
     const isRead = document.querySelector("#isRead").value;
     addBookToLibrary(title, author, page, isRead);
+    closeForm();
+    refreshForm();
     displayBooks();
 });
+
+
+// Add event listener to the "Close" button
+const closeButton = document.querySelector(".close-button");
+closeButton.addEventListener("click", () => {
+    closeForm();
+    refreshForm();
+});
+
 
 /**
  * Initializes the book display by calling the `displayBooks()` function when the DOM content has finished loading.
